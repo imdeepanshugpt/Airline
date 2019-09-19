@@ -1,12 +1,12 @@
 import React from 'react';
 
-class InFlight extends React.Component {
+class PassengerList extends React.Component {
     render() {
         return(
             <div>
-                InFlight
+                Passenger List
             </div>
         );
     }
 }
-export default InFlight;
+export default PassengerList;

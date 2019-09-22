@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './core/Header';
-import Home from './core/Home';
+import FlightDetails from './core/FlightDetails';
 import { Router, Route } from 'react-router-dom';
 import CheckIn from './features/CheckIn';
 import InFlight from './features/InFlight';
@@ -9,11 +9,11 @@ import history from '../history';
 
 const App = () => {
     return (
-        <Router  history={history}>
+        <Router history={history}>
             <div>
                 <Header />
-                <Home />
-                <Route path="/" exact component={CheckIn} />
+                <Route path="/" exact component={FlightDetails} />
+                <Route path="/checkin" component={CheckIn} />
                 <Route path="/inflight" component={InFlight} />
                 <Route path="/passengerlist" component={PassengerList} />
             </div>

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import GoogleAuth from './GoogleAuth';
 import IconButton from '@material-ui/core/IconButton';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
+import history from '../../history';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +27,7 @@ const Header = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton edge="start" onClick={() => { history.push("/") }} className={classes.menuButton} color="inherit" aria-label="menu">
             <FlightTakeoffIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>

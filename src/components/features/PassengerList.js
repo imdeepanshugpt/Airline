@@ -3,44 +3,64 @@ import { connect } from 'react-redux';
 import { fetchPassengerDetails } from '../../store/actions';
 import Button from '@material-ui/core/Button';
 import './style.scss';
+import history from '../../history';
 
 class PassengerList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { flightDetails: undefined };
+    }
+    componentWillMount() {
+        this.setState({ flightDetails: this.props.history.location.state });
+    }
     componentDidMount() {
         this.props.fetchPassengerDetails();
     }
     filterPassengerList(passengerList) {
-        this.flightDetails = this.props.history.location.state;
-        this.updatedPassengerList = passengerList.filter((passenger) => {
-            return (passenger.flightId === this.flightDetails.flightId)
-        });
+        if (passengerList.length > 0) {
+            this.updatedPassengerList = passengerList.filter((passenger) => {
+                return (passenger.flightId === this.state.flightDetails.flightId)
+            });
+        }
+    }
+    changeSeat(passenger) {
+        history.push("/checkin", { passenger, flightDetails: this.state.flightDetails });
     }
     renderPassengerList() {
         const buttonStyle = {
             float: 'right'
         };
-        return this.updatedPassengerList.map((passenger) => {
-            return (
-                <tr key={passenger.id}>
-                    <td>{passenger.name}</td>
-                    <td>{passenger.id}</td>
-                    <td>{passenger.seatNumber}
-                        <Button color="primary" style={buttonStyle}>
-                            Change
+        if (this.updatedPassengerList && this.updatedPassengerList.length > 0) {
+            return this.updatedPassengerList.map((passenger) => {
+                return (
+                    <tr key={passenger.id}>
+                        <td>{passenger.name}</td>
+                        <td>{passenger.id}</td>
+                        <td>{passenger.seatNumber}
+                            <Button color="primary" style={buttonStyle} onClick={() => this.changeSeat(passenger)}>
+                                Change
                         </Button>
-                    </td>
-                    <td>{passenger.checkIn}</td>
-                    <td>{passenger.ancillaryService}</td>
-                    <td>{passenger.wheelChair}</td>
-                    <td>{passenger.infants}</td>
-                </tr>
-            )
-        });
+                        </td>
+                        <td>{passenger.checkIn}</td>
+                        <td>{passenger.ancillaryService}</td>
+                        <td>{passenger.wheelChair}</td>
+                        <td>{passenger.infants}</td>
+                    </tr>
+                )
+            });
+        } else {
+            return (
+                <div style={{ textAlign: 'center' }}>No Passengers</div>
+            );
+        }
     }
     handleChange = name => event => {
         this.setState({ ...this.props.passengerList, [name]: event.target.checked });
     };
     render() {
-        this.filterPassengerList(this.props.passengerList);
+        if (this.props.passengerList && (this.props.passengerList.length > 0)) {
+            this.filterPassengerList(this.props.passengerList);
+        }
         return (
             <div>
                 <table>
@@ -64,7 +84,7 @@ class PassengerList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         passengerList: state.airline.passengers,
-        checkedIn : true
+        checkedIn: true
     };
 }
 export default connect(mapStateToProps, { fetchPassengerDetails })(PassengerList);

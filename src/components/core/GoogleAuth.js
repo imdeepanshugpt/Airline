@@ -2,7 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { signIn, signOut } from './../../store/actions';
 import Button from '@material-ui/core/Button';
+import Toolbar from '@material-ui/core/Toolbar';
+import history from '../../history';
+
 class GoogleAuth extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { imageUrl: undefined, userName: undefined };
+    }
     componentDidMount() {
         window.gapi.load('client:auth2', () => {
             window.gapi.client.init({
@@ -18,9 +25,12 @@ class GoogleAuth extends React.Component {
 
     OAuthChange = (isSignedIn) => {
         if (isSignedIn) {
-            this.props.signIn(this.auth.currentUser.get().getId());
+            this.props.signIn(this.auth.currentUser.get().getBasicProfile());
+            const userData = this.auth.currentUser.get().getBasicProfile();
+            this.setState({ imageUrl: userData.getImageUrl(), userName: userData.getName() });
         } else {
             this.props.signOut();
+            this.setState({ imageUrl: undefined, userName: undefined });
         }
     };
 
@@ -46,10 +56,29 @@ class GoogleAuth extends React.Component {
         }
     }
 
+    loadAdminPage() {
+        history.push("/admin");
+    }
 
     render() {
+        const img = {
+            display: 'inline-block',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            objectFit: 'cover'
+        };
         return (
-            <div>{this.renderAuthButton()}</div>
+            <div>
+                <Toolbar>
+                    <Button color="inherit" onClick={this.loadAdminPage}>Admin</Button>
+                    {
+                        this.state.imageUrl ?
+                            <img src={this.state.imageUrl} style={img} alt="user-profile-pic"></img> : ''
+                    }
+                    {this.renderAuthButton()}
+                </Toolbar>
+            </div >
         );
     }
 }

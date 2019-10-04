@@ -19,7 +19,7 @@ class Admin extends React.Component {
     setSelection(type) {
         this.setState({ selection: type, managePassenger: this.state.managePassenger });
     }
-    renderInput({ input, label }, value) {
+    renderInput({ input, label }) {
         return (
             <div style={{ display: 'block' }}>
                 <label style={{

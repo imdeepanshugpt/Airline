@@ -15,6 +15,10 @@ tr:nth-child(even) {
   background-color: #5654b4;
   color: white;
 }
-tr:nth-child(even) Button{
+tr:nth-child(even) button {
   color: white;
+}
+
+body {
+  font-family: arial, sans-serif;
 }

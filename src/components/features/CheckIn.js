@@ -18,6 +18,7 @@ class CheckIn extends React.Component {
 
     }
     componentWillMount() {
+        this.props.fetchPassengerDetails();
         if (this.props.history.location.state.passenger && this.props.history.location.state.flightDetails) {
             let changeSeatPassengerDetails;
             changeSeatPassengerDetails = this.props.history.location.state.passenger;
@@ -26,9 +27,6 @@ class CheckIn extends React.Component {
             const flightDetails = this.props.history.location.state;
             this.setState({ passengerDetails: this.state.passengerDetails, flightDetails: flightDetails, selectedSeat: this.state.selectedSeat, seatIndex: this.state.seatIndex, seatChar: this.state.seatType });
         }
-    }
-    componentDidMount() {
-        this.props.fetchPassengerDetails();
     }
 
     seatSelected(index, seatType) {
@@ -86,7 +84,7 @@ class CheckIn extends React.Component {
         if (checkInPassenger.length && checkInPassenger[0].name) {
             this.setState({
                 passengerDetails: checkInPassenger,
-                flightDetails: this.state.flights,
+                flightDetails: this.state.flightDetails,
                 selectedSeat: checkInPassenger[0].seatNumber,
                 seatIndex: this.state.seatIndex,
                 seatChar: this.state.seatChar
@@ -94,7 +92,7 @@ class CheckIn extends React.Component {
         } else {
             this.setState({
                 passengerDetails: [],
-                flightDetails: this.state.flights,
+                flightDetails: this.state.flightDetails,
                 selectedSeat: undefined,
                 seatIndex: undefined,
                 seatChar: undefined
@@ -141,7 +139,6 @@ class CheckIn extends React.Component {
                 break;
         }
         this.props.updateFlightDetails(flightDetails.id, flightDetails);
-
     }
     renderPassengerDetails = (passenger) => {
         return (
@@ -183,7 +180,7 @@ class CheckIn extends React.Component {
         return (
             <div className="checkin">
                 <div className="container-fluid">
-                    <input type="text" name="search" placeholder="Enter PNR Number"
+                    <input type="text" className="search-input" name="search" placeholder="Enter PNR Number"
                         onChange={(event) => this.fetchPassengerDetails(event, updatedPassengerList)} />
                 </div>
                 <Grid container spacing={3}>
@@ -192,7 +189,7 @@ class CheckIn extends React.Component {
                     </Grid>
                     <Grid item xs={6}>
                         {
-                            (passengerDetails.length === 1) ?
+                            (passengerDetails.length === 1 && this.state.flightDetails) ?
                                 <div className="plane">
                                     <div className="cockpit">
                                         <h1>Please select a seat</h1>

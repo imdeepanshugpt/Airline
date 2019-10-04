@@ -11,16 +11,20 @@ class PassengerList extends React.Component {
         this.state = { flightDetails: undefined };
     }
     componentWillMount() {
-        this.setState({ flightDetails: this.props.history.location.state });
+        if (!this.props.adminFlag) {
+            this.setState({ flightDetails: this.props.history.location.state });
+        }
     }
     componentDidMount() {
         this.props.fetchPassengerDetails();
     }
     filterPassengerList(passengerList) {
-        if (passengerList.length > 0) {
+        if (passengerList.length > 0 && !(this.props.adminFlag)) {
             this.updatedPassengerList = passengerList.filter((passenger) => {
                 return (passenger.flightId === this.state.flightDetails.flightId)
             });
+        } else if (this.props.adminFlag) {
+            this.updatedPassengerList = passengerList;
         }
     }
     changeSeat(passenger) {
@@ -37,9 +41,12 @@ class PassengerList extends React.Component {
                         <td>{passenger.name}</td>
                         <td>{passenger.id}</td>
                         <td>{passenger.seatNumber}
-                            <Button color="primary" style={buttonStyle} onClick={() => this.changeSeat(passenger)}>
-                                Change
-                        </Button>
+                            {!this.props.adminFlag ?
+                                <Button color="primary" style={buttonStyle} onClick={() => this.changeSeat(passenger)}>
+                                    Change
+                            </Button>
+                                : ''
+                            }
                         </td>
                         <td>{passenger.checkIn}</td>
                         <td>{passenger.ancillaryService}</td>
@@ -48,10 +55,6 @@ class PassengerList extends React.Component {
                     </tr>
                 )
             });
-        } else {
-            return (
-                <div style={{ textAlign: 'center' }}>No Passengers</div>
-            );
         }
     }
     handleChange = name => event => {
@@ -81,6 +84,7 @@ class PassengerList extends React.Component {
         );
     }
 }
+
 const mapStateToProps = (state) => {
     return {
         passengerList: state.airline.passengers,

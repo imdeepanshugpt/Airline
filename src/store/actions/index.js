@@ -4,7 +4,8 @@ import {
     FETCH_FLIGHTS,
     FETCH_PASSENGERS,
     UPDATE_PASSENGER,
-    UPDATE_FLIGHT
+    UPDATE_FLIGHT,
+    MANAGE_PASSENGER
 } from './types';
 import airline from '../../apis/airline';
 export const signIn = (userId) => {
@@ -38,4 +39,8 @@ export const updatePassengerDetails = (id, passengerDetails) => async dispatch =
 export const updateFlightDetails = (id, flightDetails) => async dispatch => {
     const response = await airline.put(`/flights/${id}`, flightDetails);
     dispatch({ type: UPDATE_FLIGHT, payload: response.data });
+}
+
+export const managePassenger = (managePassenger) => dispatch => {
+    dispatch({ type: MANAGE_PASSENGER, payload: managePassenger });
 }

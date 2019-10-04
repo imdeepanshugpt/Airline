@@ -28,7 +28,7 @@ class PieChart extends React.Component {
         };
         return (
             <div>
-                <Doughnut data={chartData} options={chartOptions} width="500" height="250" />
+                <Doughnut data={chartData} options={chartOptions} width={500} height={250} />
             </div >
         );
     }

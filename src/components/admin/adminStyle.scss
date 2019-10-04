@@ -1,19 +1,11 @@
 * {
   box-sizing: border-box;
 }
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background-color: #d5dae5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 .header {
   position: absolute;
   width: 100%;
   z-index: 3;
-  height: 44px;
+  // height: 44px;
   background-color: #fff;
 }
 /* logo in header(mobile version) and side-nav (tablet & desktop) */
@@ -99,11 +91,11 @@ span:after {
 .side-nav ul li.active:before {
   content: "";
   position: absolute;
-  width: 4px;
+  width: 10px;
   height: 100%;
   top: 0;
   left: 0;
-  background-color: #fff;
+  background-color: darkslateblue;
 }
 .side-nav ul li a {
   color: #fff;
@@ -226,4 +218,17 @@ span:after {
   border-top-right-radius: 6px;
   color: #617085;
   font-weight: 600;
+}
+
+.form-input {
+  height: 36px;
+  width: 326px;
+  margin: 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
 }

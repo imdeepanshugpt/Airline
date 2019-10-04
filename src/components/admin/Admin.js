@@ -53,8 +53,18 @@ class Admin extends React.Component {
                             <td>{passenger.id}</td>
                             <td>{passenger.seatNumber}</td>
                             <td>{passenger.ancillaryService}</td>
-                            <td>{passenger.wheelChair}</td>
-                            <td>{passenger.infants}</td>
+                            <td>
+                                {passenger.wheelChair ?
+                                    ((passenger.wheelChair === "Yes") || (passenger.wheelChair === true)) ?
+                                        "Yes" : "No" : 'No'
+                                }
+                            </td>
+                            <td>
+                                {passenger.infants ?
+                                    ((passenger.infants === "Yes") || (passenger.infants === true)) ?
+                                        "Yes" : "No" : 'No'
+                                }
+                            </td>
                         </tr>
                     </tbody>
                 </table>

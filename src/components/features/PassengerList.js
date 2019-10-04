@@ -1,30 +1,38 @@
 import React from 'react';
+import Card from '@material-ui/core/Card';
 import { connect } from 'react-redux';
 import { fetchPassengerDetails } from '../../store/actions';
 import Button from '@material-ui/core/Button';
 import './style.scss';
+import './checkBox.scss';
 import history from '../../history';
 
 class PassengerList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { flightDetails: undefined };
+        this.state = { flightDetails: undefined, updatedPassengerList: undefined };
     }
     componentWillMount() {
+        this.props.fetchPassengerDetails();
         if (!this.props.adminFlag) {
             this.setState({ flightDetails: this.props.history.location.state });
         }
     }
-    componentDidMount() {
-        this.props.fetchPassengerDetails();
+    componentDidUpdate(prevProps) {
+        if (prevProps.passengerList !== this.props.passengerList) {
+            if (this.props.passengerList && (this.props.passengerList.length > 0)) {
+                this.filterPassengerList(this.props.passengerList);
+            }
+        }
     }
     filterPassengerList(passengerList) {
         if (passengerList.length > 0 && !(this.props.adminFlag)) {
-            this.updatedPassengerList = passengerList.filter((passenger) => {
+            const updatedPassengerList = passengerList.filter((passenger) => {
                 return (passenger.flightId === this.state.flightDetails.flightId)
             });
+            this.setState({ updatedPassengerList: updatedPassengerList });
         } else if (this.props.adminFlag) {
-            this.updatedPassengerList = passengerList;
+            this.setState({ updatedPassengerList: passengerList });
         }
     }
     changeSeat(passenger) {
@@ -34,8 +42,8 @@ class PassengerList extends React.Component {
         const buttonStyle = {
             float: 'right'
         };
-        if (this.updatedPassengerList && this.updatedPassengerList.length > 0) {
-            return this.updatedPassengerList.map((passenger) => {
+        if (this.state.updatedPassengerList && this.state.updatedPassengerList.length > 0) {
+            return this.state.updatedPassengerList.map((passenger) => {
                 return (
                     <tr key={passenger.id}>
                         <td>{passenger.name}</td>
@@ -48,10 +56,19 @@ class PassengerList extends React.Component {
                                 : ''
                             }
                         </td>
-                        <td>{passenger.checkIn}</td>
                         <td>{passenger.ancillaryService}</td>
-                        <td>{passenger.wheelChair}</td>
-                        <td>{passenger.infants}</td>
+                        <td>
+                            {passenger.wheelChair ?
+                                ((passenger.wheelChair === "Yes") || (passenger.wheelChair === true)) ?
+                                    "Yes" : "No" : 'No'
+                            }
+                        </td>
+                        <td>
+                            {passenger.infants ?
+                                ((passenger.infants === "Yes") || (passenger.infants === true)) ?
+                                    "Yes" : "No" : 'No'
+                            }
+                        </td>
                     </tr>
                 )
             });
@@ -60,19 +77,55 @@ class PassengerList extends React.Component {
     handleChange = name => event => {
         this.setState({ ...this.props.passengerList, [name]: event.target.checked });
     };
-    render() {
-        if (this.props.passengerList && (this.props.passengerList.length > 0)) {
-            this.filterPassengerList(this.props.passengerList);
+    filterByCheckBox(checkBoxValue, checkBoxType) {
+        if (checkBoxType === 'CheckIn') {
+            const updated = this.state.updatedPassengerList.filter((passenger) => {
+                return (passenger.seatNumber !== "" && passenger.seatNumber)
+            })
+            this.setState({ updatedPassengerList: updated });
+        } else if (checkBoxType === 'WheelChair') {
+            const updated = this.state.updatedPassengerList.filter((passenger) => {
+                return (passenger.wheelChair !== "" && passenger.wheelChair && passenger.wheelChair !== "No")
+            })
+            this.setState({ updatedPassengerList: updated });
+
+        } else if (checkBoxType === 'Infant') {
+            const updated = this.state.updatedPassengerList.filter((passenger) => {
+                return (passenger.infants !== "" && passenger.infants && passenger.infants !== "No")
+            })
+            this.setState({ updatedPassengerList: updated });
         }
+
+    }
+    render() {
+
         return (
-            <div>
+            <div className="passenger-list">
+                <Card>
+                    <div className="container">
+                        <div className="checkbox">
+                            <input type="checkbox" id="checkbox1" name="" value=""
+                                onClick={(event) => this.filterByCheckBox(event.target.value, 'CheckIn')} />
+                            <label htmlFor="checkbox1"><span>CheckIn</span></label>
+                        </div>
+                        <div className="checkbox">
+                            <input type="checkbox" id="checkbox2" name="" value=""
+                                onClick={(event) => this.filterByCheckBox(event.target.value, 'WheelChair')} />
+                            <label htmlFor="checkbox2"><span>WheelChair</span></label>
+                        </div>
+                        <div className="checkbox">
+                            <input type="checkbox" id="checkbox3" name="" value=""
+                                onClick={(event) => this.filterByCheckBox(event.target.value, 'Infant')} />
+                            <label htmlFor="checkbox3"><span>Infant</span></label>
+                        </div>
+                    </div>
+                </Card>
                 <table>
                     <tbody>
                         <tr>
                             <th>Name</th>
                             <th>PNR Number</th>
                             <th>Seat Number</th>
-                            <th>Checked In</th>
                             <th>Ancillary services</th>
                             <th>wheel chair</th>
                             <th>Infant</th>

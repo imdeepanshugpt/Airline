@@ -4,6 +4,7 @@ import { fetchPassengerDetails, updatePassengerDetails, updateFlightDetails } fr
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import './seatMap.scss';
+import SnackBar from './SnackBar';
 
 class CheckIn extends React.Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class CheckIn extends React.Component {
             flightDetails: undefined,
             selectedSeat: "",
             seatIndex: null,
-            seatChar: null
+            seatChar: null,
+            snackbar: false
         }
 
     }
@@ -139,6 +141,7 @@ class CheckIn extends React.Component {
                 break;
         }
         this.props.updateFlightDetails(flightDetails.id, flightDetails);
+        this.setState({ snackbar: true });
     }
     renderPassengerDetails = (passenger) => {
         return (
@@ -189,6 +192,7 @@ class CheckIn extends React.Component {
         }
         return (
             <div className="checkin">
+                {this.state.snackbar ? <SnackBar message="Details has been updated successfully !"></SnackBar> : ''}
                 <div className="container-fluid">
                     <input type="text" className="search-input" name="search" placeholder="Enter PNR Number"
                         onChange={(event) => this.fetchPassengerDetails(event, updatedPassengerList)} />

@@ -78,22 +78,26 @@ class PassengerList extends React.Component {
         this.setState({ ...this.props.passengerList, [name]: event.target.checked });
     };
     filterByCheckBox(checkBoxValue, checkBoxType) {
-        if (checkBoxType === 'CheckIn') {
-            const updated = this.state.updatedPassengerList.filter((passenger) => {
-                return (passenger.seatNumber !== "" && passenger.seatNumber)
-            })
-            this.setState({ updatedPassengerList: updated });
-        } else if (checkBoxType === 'WheelChair') {
-            const updated = this.state.updatedPassengerList.filter((passenger) => {
-                return (passenger.wheelChair !== "" && passenger.wheelChair && passenger.wheelChair !== "No")
-            })
-            this.setState({ updatedPassengerList: updated });
+        if (!checkBoxValue) {
+            this.filterPassengerList(this.props.passengerList);
+        } else {
+            if (checkBoxType === 'CheckIn') {
+                const updated = this.state.updatedPassengerList.filter((passenger) => {
+                    return (passenger.seatNumber !== "" && passenger.seatNumber)
+                })
+                this.setState({ updatedPassengerList: updated });
+            } else if (checkBoxType === 'WheelChair') {
+                const updated = this.state.updatedPassengerList.filter((passenger) => {
+                    return (passenger.wheelChair !== "" && passenger.wheelChair && passenger.wheelChair !== "No")
+                })
+                this.setState({ updatedPassengerList: updated });
 
-        } else if (checkBoxType === 'Infant') {
-            const updated = this.state.updatedPassengerList.filter((passenger) => {
-                return (passenger.infants !== "" && passenger.infants && passenger.infants !== "No")
-            })
-            this.setState({ updatedPassengerList: updated });
+            } else if (checkBoxType === 'Infant') {
+                const updated = this.state.updatedPassengerList.filter((passenger) => {
+                    return (passenger.infants !== "" && passenger.infants && passenger.infants !== "No")
+                })
+                this.setState({ updatedPassengerList: updated });
+            }
         }
 
     }
@@ -105,17 +109,17 @@ class PassengerList extends React.Component {
                     <div className="container">
                         <div className="checkbox">
                             <input type="checkbox" id="checkbox1" name="" value=""
-                                onClick={(event) => this.filterByCheckBox(event.target.value, 'CheckIn')} />
+                                onClick={(event) => this.filterByCheckBox(event.target.checked, 'CheckIn')} />
                             <label htmlFor="checkbox1"><span>CheckIn</span></label>
                         </div>
                         <div className="checkbox">
                             <input type="checkbox" id="checkbox2" name="" value=""
-                                onClick={(event) => this.filterByCheckBox(event.target.value, 'WheelChair')} />
+                                onClick={(event) => this.filterByCheckBox(event.target.checked, 'WheelChair')} />
                             <label htmlFor="checkbox2"><span>WheelChair</span></label>
                         </div>
                         <div className="checkbox">
                             <input type="checkbox" id="checkbox3" name="" value=""
-                                onClick={(event) => this.filterByCheckBox(event.target.value, 'Infant')} />
+                                onClick={(event) => this.filterByCheckBox(event.target.checked, 'Infant')} />
                             <label htmlFor="checkbox3"><span>Infant</span></label>
                         </div>
                     </div>

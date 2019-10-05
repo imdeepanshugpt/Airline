@@ -33,6 +33,7 @@ class CheckIn extends React.Component {
 
     seatSelected(index, seatType) {
         this.setState({ passengerDetails: this.state.passengerDetails, flightDetails: this.state.flightDetails, selectedSeat: ((index + 1) + seatType), seatIndex: index, seatChar: seatType });
+        this.setState({ snackbar: false });
     }
 
     renderSeatButtons(seats) {
@@ -192,7 +193,7 @@ class CheckIn extends React.Component {
         }
         return (
             <div className="checkin">
-                {this.state.snackbar ? <SnackBar message="Details has been updated successfully !"></SnackBar> : ''}
+                {this.state.snackbar ? <SnackBar message="Details has been updated successfully !" open={this.state.snackbar}></SnackBar> : ''}
                 <div className="container-fluid">
                     <input type="text" className="search-input" name="search" placeholder="Enter PNR Number"
                         onChange={(event) => this.fetchPassengerDetails(event, updatedPassengerList)} />

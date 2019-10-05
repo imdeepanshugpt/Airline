@@ -152,7 +152,7 @@ class InFlight extends React.Component {
     render() {
         return (
             <div className="flightIn">
-                {this.state.snackbar ? <SnackBar message="Details has been updated successfully !"></SnackBar> : ''}
+                {this.state.snackbar ? <SnackBar message="Details has been updated successfully !" open={this.state.snackbar}></SnackBar> : ''}
                 <Grid container spacing={3}>
                     <Grid item xs={6} style={{ position: 'relative' }}>
                         {this.renderReduxForm()}

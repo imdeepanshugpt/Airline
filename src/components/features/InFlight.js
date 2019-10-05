@@ -50,6 +50,7 @@ class InFlight extends React.Component {
         );
     }
     seatSelected(ticketId) {
+        this.props.fetchPassengerDetails();
         const managePassenger = this.props.passengerList.filter((passenger) => {
             return (Number(passenger.id) === Number(ticketId));
         });
@@ -57,9 +58,13 @@ class InFlight extends React.Component {
         this.setState({ updateReduxForm: true });
     }
     onSubmit = (formValues) => {
+        this.props.passengerList.forEach((passenger, index) => {
+            if (Number(passenger.id) === Number(formValues.id)) {
+                this.props.passengerList[index] = formValues;
+            }
+        });
         this.props.updatePassengerDetails(formValues.id, formValues);
         this.setState({ snackbar: true });
-        this.props.fetchPassengerDetails();
     }
     renderSeatButtons(seats) {
         return Object.keys(seats).map((seat, index) => {

@@ -9,7 +9,8 @@ class InFlight extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            flightDetails: undefined
+            flightDetails: undefined,
+            updateReduxForm: false
         };
     }
     componentWillMount() {
@@ -51,6 +52,7 @@ class InFlight extends React.Component {
             return (Number(passenger.id) === Number(ticketId));
         });
         this.props.managePassenger(managePassenger[0]);
+        this.setState({ updateReduxForm: true });
     }
     onSubmit = (formValues) => {
         this.props.updatePassengerDetails(formValues.id, formValues);
@@ -105,7 +107,7 @@ class InFlight extends React.Component {
         })
     }
     renderReduxForm() {
-        if (this.props.initialValues) {
+        if (this.props.initialValues && this.state.updateReduxForm) {
             return (
                 <div style={{ position: 'sticky', top: '100px' }}>
                     <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -164,7 +166,8 @@ class InFlight extends React.Component {
     }
 }
 const formWrapped = reduxForm({
-    form: 'passengerDetails'
+    form: 'passengerDetails',
+    enableReinitialize: true
 })(InFlight);
 const mapStateToProps = (state) => {
     return {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchPassengerDetails, managePassenger } from '../../store/actions';
+import { fetchPassengerDetails, managePassenger, updatePassengerDetails } from '../../store/actions';
 import { Field, reduxForm } from 'redux-form';
 import Grid from '@material-ui/core/Grid';
+import SnackBar from './SnackBar';
 import Button from '@material-ui/core/Button';
 
 class InFlight extends React.Component {
@@ -10,7 +11,8 @@ class InFlight extends React.Component {
         super(props);
         this.state = {
             flightDetails: undefined,
-            updateReduxForm: false
+            updateReduxForm: false,
+            snackbar: false
         };
     }
     componentWillMount() {
@@ -56,7 +58,8 @@ class InFlight extends React.Component {
     }
     onSubmit = (formValues) => {
         this.props.updatePassengerDetails(formValues.id, formValues);
-        this.setState({ selection: 'Manage Passenger', managePassenger: undefined });
+        this.setState({ snackbar: true });
+        this.props.fetchPassengerDetails();
     }
     renderSeatButtons(seats) {
         return Object.keys(seats).map((seat, index) => {
@@ -144,6 +147,7 @@ class InFlight extends React.Component {
     render() {
         return (
             <div className="flightIn">
+                {this.state.snackbar ? <SnackBar message="Details has been updated successfully !"></SnackBar> : ''}
                 <Grid container spacing={3}>
                     <Grid item xs={6} style={{ position: 'relative' }}>
                         {this.renderReduxForm()}
@@ -177,4 +181,4 @@ const mapStateToProps = (state) => {
         initialValues: state.airline.managePassenger
     }
 }
-export default connect(mapStateToProps, { fetchPassengerDetails, managePassenger })(formWrapped);
+export default connect(mapStateToProps, { fetchPassengerDetails, managePassenger, updatePassengerDetails })(formWrapped);

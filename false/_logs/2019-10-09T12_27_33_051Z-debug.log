@@ -1,0 +1,30 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\M1046873\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'test',
+1 verbose cli   '--no-cache' ]
+2 info using npm@6.9.0
+3 info using node@v10.16.0
+4 verbose stack Error: Failed to parse json
+4 verbose stack Unexpected token } in JSON at position 895 while parsing near '...est --env=jsdom",
+4 verbose stack   },
+4 verbose stack   "eslintConfig":...'
+4 verbose stack     at parseError (C:\Users\M1046873\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:452:11)
+4 verbose stack     at parseJson (C:\Users\M1046873\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:104:26)
+4 verbose stack     at C:\Users\M1046873\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:51:5
+4 verbose stack     at C:\Users\M1046873\AppData\Roaming\npm\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:90:16
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+5 verbose cwd D:\201React\airline
+6 verbose Windows_NT 10.0.17134
+7 verbose argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\M1046873\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "test" "--no-cache"
+8 verbose node v10.16.0
+9 verbose npm  v6.9.0
+10 error file D:\201React\airline\package.json
+11 error code EJSONPARSE
+12 error JSON.parse Failed to parse json
+12 error JSON.parse Unexpected token } in JSON at position 895 while parsing near '...est --env=jsdom",
+12 error JSON.parse   },
+12 error JSON.parse   "eslintConfig":...'
+13 error JSON.parse Failed to parse package.json data.
+13 error JSON.parse package.json must be actual JSON, not just JavaScript.
+14 verbose exit [ 1, true ]

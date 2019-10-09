@@ -11,7 +11,7 @@ import history from '../../history';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 
-class FlightDetails extends React.Component {
+export class FlightDetails extends React.Component {
     componentDidMount() {
         this.props.fetchFlightDetails();
     }
@@ -40,36 +40,38 @@ class FlightDetails extends React.Component {
     renderFlightList() {
         return this.props.flights.map((flight) => {
             return (
-                <Card style={this.cardColor} key={flight.flightId}>
-                    <CardContent >
-                        <Typography gutterBottom variant="h5" component="h2" >
-                            <Grid container spacing={3}>
-                                <Grid item xs>
-                                    <Chip color="primary" label={flight.departureTime} />
-                                    <Chip color="primary" label={flight.fromLocation} />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <FlightTakeoffIcon style={this.takeOffIcon} />
+                <div key={flight.flightId}>
+                    <Card style={this.cardColor} >
+                        <CardContent >
+                            <Typography gutterBottom variant="h5" component="h2" >
+                                <Grid container spacing={3}>
+                                    <Grid item xs>
+                                        <Chip color="primary" label={flight.departureTime} />
+                                        <Chip color="primary" label={flight.fromLocation} />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <FlightTakeoffIcon style={this.takeOffIcon} />
                                         ------------------------------------
                                 <RoomIcon style={this.landingIcon} />
+                                    </Grid>
+                                    <Grid item xs>
+                                        <Chip color="primary" label={flight.toLocation} />
+                                        <Chip color="primary" label={flight.arrivalTime} />
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs>
-                                    <Chip color="primary" label={flight.toLocation} />
-                                    <Chip color="primary" label={flight.arrivalTime} />
-                                </Grid>
-                            </Grid>
-                        </Typography>
-                    </CardContent>
-                    <Button style={this.cardColor} onClick={() => history.push("/checkin", flight)} >
-                        CheckIn
+                            </Typography>
+                        </CardContent>
+                        <Button style={this.cardColor} onClick={() => history.push("/checkin", flight)} >
+                            CheckIn
                         </Button>
-                    <Button style={this.cardColor} onClick={() => history.push("/inflight", flight)}>
-                        FlightIn
+                        <Button style={this.cardColor} onClick={() => history.push("/inflight", flight)}>
+                            FlightIn
                         </Button>
-                    <Button style={this.cardColor} onClick={() => history.push("/passengerlist", flight)}>
-                        PassengerList
+                        <Button style={this.cardColor} onClick={() => history.push("/passengerlist", flight)}>
+                            PassengerList
                         </Button>
-                </Card >
+                    </Card >
+                </div>
             );
         });
     }

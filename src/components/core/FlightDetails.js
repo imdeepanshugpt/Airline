@@ -2,8 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
-import RoomIcon from '@material-ui/icons/Room';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { connect } from 'react-redux';
 import { fetchFlightDetails } from '../../store/actions';
 import Button from '@material-ui/core/Button';
@@ -20,13 +19,10 @@ export class FlightDetails extends React.Component {
         backgroundColor: 'midnightblue',
         margin: '10px',
     };
-    takeOffIcon = {
-        marginLeft: '70px'
+    onTheWay = {
+        display: 'flex',
+        justifyContent: 'center'
     };
-
-    landingIcon = {
-        marginRight: '70px'
-    }
     flightHeader = {
         textAlign: 'center',
         fontSize: '20px',
@@ -49,12 +45,10 @@ export class FlightDetails extends React.Component {
                                         <Chip color="primary" label={flight.departureTime} />
                                         <Chip color="primary" label={flight.fromLocation} />
                                     </Grid>
-                                    <Grid item xs={6}>
-                                        <FlightTakeoffIcon style={this.takeOffIcon} />
-                                        ------------------------------------
-                                <RoomIcon style={this.landingIcon} />
+                                    <Grid item xs={6} style={this.onTheWay}>
+                                        <ArrowForwardIcon  />
                                     </Grid>
-                                    <Grid item xs>
+                                    <Grid item xs style={{display:'flex', justifyContent:'flex-end'}}>
                                         <Chip color="primary" label={flight.toLocation} />
                                         <Chip color="primary" label={flight.arrivalTime} />
                                     </Grid>

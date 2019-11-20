@@ -32,12 +32,12 @@ export const fetchPassengerDetails = () => async dispatch => {
 }
 
 export const updatePassengerDetails = (id, passengerDetails) => async dispatch => {
-    const response = await airline.put(`/passengers/${id}`, passengerDetails);
+    const response = await airline.patch(`/passengers/${id}`, passengerDetails);
     dispatch({ type: UPDATE_PASSENGER, payload: response.data });
 }
 
 export const updateFlightDetails = (id, flightDetails) => async dispatch => {
-    const response = await airline.put(`/flights/${id}`, flightDetails);
+    const response = await airline.patch(`/flights/${id}`, flightDetails);
     dispatch({ type: UPDATE_FLIGHT, payload: response.data });
 }
 

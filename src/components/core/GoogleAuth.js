@@ -71,7 +71,11 @@ class GoogleAuth extends React.Component {
         return (
             <div>
                 <Toolbar>
-                    <Button color="inherit" onClick={this.loadAdminPage}>Admin</Button>
+                    {
+                        this.props.isSignedIn ?
+                            <Button color="inherit" onClick={this.loadAdminPage}>Admin</Button>
+                            : ''
+                    }
                     {
                         this.state.imageUrl ?
                             <img src={this.state.imageUrl} style={img} alt="user-profile-pic"></img> : ''

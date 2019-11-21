@@ -104,6 +104,7 @@ const Admin = (props) => {
             props.fetchPassengerDetails();
             props.fetchFlightDetails();
         })(props)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []
     );
 

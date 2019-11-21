@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import history from '../../history';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export class FlightDetails extends React.Component {
     componentDidMount() {
@@ -46,24 +47,30 @@ export class FlightDetails extends React.Component {
                                         <Chip color="primary" label={flight.fromLocation} />
                                     </Grid>
                                     <Grid item xs={6} style={this.onTheWay}>
-                                        <ArrowForwardIcon  />
+                                        <ArrowForwardIcon />
                                     </Grid>
-                                    <Grid item xs style={{display:'flex', justifyContent:'flex-end'}}>
+                                    <Grid item xs style={{ display: 'flex', justifyContent: 'flex-end' }}>
                                         <Chip color="primary" label={flight.toLocation} />
                                         <Chip color="primary" label={flight.arrivalTime} />
                                     </Grid>
                                 </Grid>
                             </Typography>
                         </CardContent>
-                        <Button style={this.cardColor} onClick={() => history.push("/checkin", flight)} >
-                            CheckIn
+                        <Tooltip title="checkin">
+                            <Button style={this.cardColor} onClick={() => history.push("/checkin", flight)} >
+                                CheckIn
                         </Button>
-                        <Button style={this.cardColor} onClick={() => history.push("/inflight", flight)}>
-                            FlightIn
+                        </Tooltip>
+                        <Tooltip title="flightIn">
+                            <Button style={this.cardColor} onClick={() => history.push("/inflight", flight)}>
+                                FlightIn
                         </Button>
-                        <Button style={this.cardColor} onClick={() => history.push("/passengerlist", flight)}>
-                            PassengerList
+                        </Tooltip>
+                        <Tooltip title="passenger list">
+                            <Button style={this.cardColor} onClick={() => history.push("/passengerlist", flight)}>
+                                PassengerList
                         </Button>
+                        </Tooltip>
                     </Card >
                 </div>
             );

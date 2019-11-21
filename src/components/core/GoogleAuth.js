@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { signIn, signOut } from './../../store/actions';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import history from '../../history';
+import Tooltip from '@material-ui/core/Tooltip';
 
 class GoogleAuth extends React.Component {
     constructor(props) {
@@ -47,11 +49,15 @@ class GoogleAuth extends React.Component {
             return null;
         } else if (this.props.isSignedIn) {
             return (
-                <Button color="inherit" onClick={this.onSignOutClick}>Logout</Button>
+                <Tooltip title="logout">
+                    <Button color="inherit" onClick={this.onSignOutClick}><ExitToAppIcon /></Button>
+                </Tooltip>
             );
         } else {
             return (
-                <Button color="inherit" onClick={this.onSignInClick}>Login</Button>
+                <Tooltip title="login">
+                    <Button color="inherit" onClick={this.onSignInClick}>Login</Button>
+                </Tooltip>
             );
         }
     }
@@ -73,7 +79,9 @@ class GoogleAuth extends React.Component {
                 <Toolbar>
                     {
                         this.props.isSignedIn ?
-                            <Button color="inherit" onClick={this.loadAdminPage}>Admin</Button>
+                            <Tooltip title="admin">
+                                <Button color="inherit" onClick={this.loadAdminPage}>Admin</Button>
+                            </Tooltip>
                             : ''
                     }
                     {

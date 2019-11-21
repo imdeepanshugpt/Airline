@@ -5,7 +5,8 @@ import { Router, Route } from 'react-router-dom';
 import CheckIn from './features/CheckIn';
 import InFlight from './features/InFlight';
 import PassengerList from './features/PassengerList';
-import Admin from './admin/Admin';
+// import Admin from './admin/Admin';
+import Adminstrator from './admin/Adminstrator';
 import history from '../history';
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
                 <Route path="/checkin" component={CheckIn} />
                 <Route path="/inflight" component={InFlight} />
                 <Route path="/passengerlist" component={PassengerList} />
-                <Route path="/admin" component={Admin} />
+                <Route path="/admin" component={Adminstrator} />
             </div>
         </Router>
     );

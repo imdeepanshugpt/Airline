@@ -7,6 +7,7 @@ import GoogleAuth from './GoogleAuth';
 import IconButton from '@material-ui/core/IconButton';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import history from '../../history';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,9 +28,11 @@ const Header = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" onClick={() => { history.push("/") }} className={classes.menuButton} color="inherit" aria-label="menu">
-            <FlightTakeoffIcon />
-          </IconButton>
+          <Tooltip title="home">
+            <IconButton edge="start" onClick={() => { history.push("/") }} className={classes.menuButton} color="inherit" aria-label="menu">
+              <FlightTakeoffIcon />
+            </IconButton>
+          </Tooltip>
           <Typography variant="h6" className={classes.title}>
             Airline
           </Typography>

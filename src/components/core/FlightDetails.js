@@ -41,7 +41,8 @@ export class FlightDetails extends React.Component {
                     <Card style={this.cardColor} >
                         <CardContent >
                             <Typography gutterBottom variant="h5" component="h2" >
-                                <Grid container spacing={3}>
+                                <Grid container spacing={3}
+                                    style={{ display: 'flex', flexWrap: 'inherit' }}>
                                     <Grid item xs>
                                         <Chip color="primary" label={flight.departureTime} />
                                         <Chip color="primary" label={flight.fromLocation} />
@@ -49,7 +50,8 @@ export class FlightDetails extends React.Component {
                                     <Grid item xs={6} style={this.onTheWay}>
                                         <ArrowForwardIcon />
                                     </Grid>
-                                    <Grid item xs style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                    <Grid item xs
+                                        style={{ display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap-reverse' }}>
                                         <Chip color="primary" label={flight.toLocation} />
                                         <Chip color="primary" label={flight.arrivalTime} />
                                     </Grid>

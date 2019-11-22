@@ -104,7 +104,7 @@ const Admin = (props) => {
             props.fetchPassengerDetails();
             props.fetchFlightDetails();
         })(props)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []
     );
 
@@ -171,7 +171,7 @@ const Admin = (props) => {
     const renderAdminData = (props) => {
         if (selection === 'Analytics') {
             return (
-                <div className="main" style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
+                <div className="main" style={{ display: 'flex', 'flexWrap': 'wrap' }}>
                     <div className="widget" style={{ width: '500px', padding: '5px' }}>
                         <div className="chart">
                             <PieChart passengers={props.passengerList.length} seatsAvailable={props.flights.length * 60} >
@@ -212,17 +212,19 @@ const Admin = (props) => {
                 })}
             >
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, {
-                            [classes.hide]: open,
-                        })}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    <Tooltip title="menu">
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, {
+                                [classes.hide]: open,
+                            })}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    </Tooltip>
                     <Typography variant="h6" noWrap>
                         Admin Dashboard
                     </Typography>
@@ -259,7 +261,18 @@ const Admin = (props) => {
                 <List>
                     {['Passenger List', 'Analytics', 'Manage Passenger'].map((text, index) => (
                         <ListItem button key={text} onClick={() => setSelection(text)}>
-                            <ListItemIcon>{index % 2 === 0 ? <FaceIcon /> : <AssessmentIcon />}</ListItemIcon>
+                            <ListItemIcon>
+                                {
+                                    index % 2 === 0 ?
+                                        <Tooltip title="passenger">
+                                            <FaceIcon />
+                                        </Tooltip>
+                                        :
+                                        <Tooltip title="analytics">
+                                            <AssessmentIcon />
+                                        </Tooltip>
+                                }
+                            </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}

@@ -5,7 +5,6 @@ import { Router, Route } from 'react-router-dom';
 import CheckIn from './features/CheckIn';
 import InFlight from './features/InFlight';
 import PassengerList from './features/PassengerList';
-// import Admin from './admin/Admin';
 import Adminstrator from './admin/Adminstrator';
 import history from '../history';
 

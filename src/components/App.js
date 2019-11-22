@@ -11,7 +11,7 @@ import history from '../history';
 const App = () => {
     return (
         <Router history={history}>
-            <div className="parentWrapper">
+            <div className="parentWrapper" style={{ fontFamily: 'arial, sans-serif' }}>
                 <Header />
                 <Route path="/" exact component={FlightDetails} />
                 <Route path="/checkin" component={CheckIn} />

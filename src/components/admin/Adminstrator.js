@@ -27,6 +27,12 @@ import SimpleCard from './Card';
 import history from '../../history';
 import Form from './Form';
 import Tooltip from '@material-ui/core/Tooltip';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const drawerWidth = 240;
 
@@ -121,36 +127,40 @@ const Admin = (props) => {
     const renderPassengerDetails = (passenger) => {
         return (
             <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Name</th>
-                            <th>PNR Number</th>
-                            <th>Seat Number</th>
-                            <th>Ancillary services</th>
-                            <th>wheel chair</th>
-                            <th>Infant</th>
-                        </tr>
-                        <tr>
-                            <td>{passenger.name}</td>
-                            <td>{passenger.id}</td>
-                            <td>{passenger.seatNumber}</td>
-                            <td>{passenger.ancillaryService}</td>
-                            <td>
-                                {passenger.wheelChair ?
-                                    ((passenger.wheelChair === "Yes") || (passenger.wheelChair === true)) ?
-                                        "Yes" : "No" : 'No'
-                                }
-                            </td>
-                            <td>
-                                {passenger.infants ?
-                                    ((passenger.infants === "Yes") || (passenger.infants === true)) ?
-                                        "Yes" : "No" : 'No'
-                                }
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <Paper>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Name</TableCell>
+                                <TableCell>PNR Number</TableCell>
+                                <TableCell>Seat Number</TableCell>
+                                <TableCell>Ancillary services</TableCell>
+                                <TableCell>wheel chair</TableCell>
+                                <TableCell>Infant</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>{passenger.name}</TableCell>
+                                <TableCell>{passenger.id}</TableCell>
+                                <TableCell>{passenger.seatNumber}</TableCell>
+                                <TableCell>{passenger.ancillaryService}</TableCell>
+                                <TableCell>
+                                    {passenger.wheelChair ?
+                                        ((passenger.wheelChair === "Yes") || (passenger.wheelChair === true)) ?
+                                            "Yes" : "No" : 'No'
+                                    }
+                                </TableCell>
+                                <TableCell>
+                                    {passenger.infants ?
+                                        ((passenger.infants === "Yes") || (passenger.infants === true)) ?
+                                            "Yes" : "No" : 'No'
+                                    }
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </Paper>
                 <div>
                     <Form />
                 </div>

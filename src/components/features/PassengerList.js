@@ -3,7 +3,12 @@ import Card from '@material-ui/core/Card';
 import { connect } from 'react-redux';
 import { fetchPassengerDetails } from '../../store/actions';
 import Button from '@material-ui/core/Button';
-import './style.scss';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 import './checkBox.scss';
 import history from '../../history';
 
@@ -45,33 +50,47 @@ class PassengerList extends React.Component {
         if (this.state.updatedPassengerList && this.state.updatedPassengerList.length > 0) {
             return this.state.updatedPassengerList.map((passenger) => {
                 return (
-                    <tr key={passenger.id}>
-                        <td>{passenger.name}</td>
-                        <td>{passenger.id}</td>
-                        <td>{passenger.seatNumber}
-                            {!this.props.adminFlag ?
-                                <Button color="primary" style={buttonStyle} onClick={() => this.changeSeat(passenger)}>
-                                    Change
-                            </Button>
-                                : ''
+                    <TableRow key={passenger.id}>
+                        <TableCell >{passenger.name}</TableCell >
+                        <TableCell >{passenger.id}</TableCell>
+                        <TableCell >{passenger.seatNumber}
+                            {
+                                !this.props.adminFlag
+                                    ?
+                                    passenger.seatNumber
+                                        ?
+                                        <Button color="primary" style={buttonStyle} onClick={() => this.changeSeat(passenger)}>
+                                            Change
+                                        </Button>
+                                        :
+                                        <Button color="primary" style={buttonStyle} onClick={() => this.changeSeat(passenger)}>
+                                            CheckIn
+                                        </Button>
+                                    : ''
                             }
-                        </td>
-                        <td>{passenger.ancillaryService}</td>
-                        <td>
+                        </TableCell >
+                        <TableCell >{passenger.ancillaryService}</TableCell >
+                        <TableCell >
                             {passenger.wheelChair ?
                                 ((passenger.wheelChair === "Yes") || (passenger.wheelChair === true)) ?
                                     "Yes" : "No" : 'No'
                             }
-                        </td>
-                        <td>
+                        </TableCell >
+                        <TableCell >
                             {passenger.infants ?
                                 ((passenger.infants === "Yes") || (passenger.infants === true)) ?
                                     "Yes" : "No" : 'No'
                             }
-                        </td>
-                    </tr>
+                        </TableCell >
+                    </TableRow >
                 )
             });
+        } else {
+            return (
+                <div style={{ margin: '20px', textAlign: 'center' }}>
+                    Sorry passenger data is not available
+                </div>
+            );
         }
     }
     handleChange = name => event => {
@@ -101,6 +120,27 @@ class PassengerList extends React.Component {
         }
 
     }
+    renderTableHeader() {
+        return (
+            <Paper>
+                <Table >
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell>PNR Number</TableCell>
+                            <TableCell>Seat Number</TableCell>
+                            <TableCell>Ancillary services</TableCell>
+                            <TableCell>Wheel chair</TableCell>
+                            <TableCell>Infant</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.renderPassengerList()}
+                    </TableBody>
+                </Table >
+            </Paper>
+        );
+    }
     render() {
 
         return (
@@ -124,19 +164,7 @@ class PassengerList extends React.Component {
                         </div>
                     </div>
                 </Card>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Name</th>
-                            <th>PNR Number</th>
-                            <th>Seat Number</th>
-                            <th>Ancillary services</th>
-                            <th>wheel chair</th>
-                            <th>Infant</th>
-                        </tr>
-                        {this.renderPassengerList()}
-                    </tbody>
-                </table>
+                {this.renderTableHeader()}
             </div>
         );
     }

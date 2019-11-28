@@ -7,7 +7,7 @@ class SnackBar extends React.Component {
         this.state = { open: this.props.open, message: this.props.message };
     }
 
-    componentWillReceiveProps(){
+    UNSAFE_componentWillReceiveProps(){
         this.setState({ open: this.props.open, message: this.props.message });
     }
 

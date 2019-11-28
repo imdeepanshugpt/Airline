@@ -4,9 +4,8 @@ import Typography from '@material-ui/core/Typography';
 
 const style = {
     textAlign: 'center',
-    bottom: 0,
-    position: 'absolute',
-    width: '100%'
+    width: '100%',
+    marginTop: 'auto'
 }
 const Footer = () => {
     return (

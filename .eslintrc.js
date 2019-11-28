@@ -22,6 +22,8 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "react/prop-types": 0,
+        "no-undef": 0
     },
     "ignorePatterns": ["serviceWorker.js", "node_modules/"],
 };

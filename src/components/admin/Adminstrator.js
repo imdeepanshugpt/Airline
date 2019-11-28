@@ -164,7 +164,7 @@ const Admin = (props) => {
                     </Paper>
                 </div>
                 <div style={{ padding: '10px' }}>
-                    <Paper style={{ padding: '40px' }}>
+                    <Paper style={{ padding: '10px' }}>
                         <Form />
                     </Paper>
                 </div>

@@ -126,43 +126,47 @@ const Admin = (props) => {
     }
     const renderPassengerDetails = (passenger) => {
         return (
-            <div>
-                <Paper>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>PNR Number</TableCell>
-                                <TableCell>Seat Number</TableCell>
-                                <TableCell>Ancillary services</TableCell>
-                                <TableCell>wheel chair</TableCell>
-                                <TableCell>Infant</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell>{passenger.name}</TableCell>
-                                <TableCell>{passenger.id}</TableCell>
-                                <TableCell>{passenger.seatNumber}</TableCell>
-                                <TableCell>{passenger.ancillaryService}</TableCell>
-                                <TableCell>
-                                    {passenger.wheelChair ?
-                                        ((passenger.wheelChair === "Yes") || (passenger.wheelChair === true)) ?
-                                            "Yes" : "No" : 'No'
-                                    }
-                                </TableCell>
-                                <TableCell>
-                                    {passenger.infants ?
-                                        ((passenger.infants === "Yes") || (passenger.infants === true)) ?
-                                            "Yes" : "No" : 'No'
-                                    }
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </Paper>
-                <div>
-                    <Form />
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                <div style={{ padding: '10px' }}>
+                    <Paper>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>PNR Number</TableCell>
+                                    <TableCell>Seat Number</TableCell>
+                                    <TableCell>Ancillary services</TableCell>
+                                    <TableCell>wheel chair</TableCell>
+                                    <TableCell>Infant</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>{passenger.name}</TableCell>
+                                    <TableCell>{passenger.id}</TableCell>
+                                    <TableCell>{passenger.seatNumber}</TableCell>
+                                    <TableCell>{passenger.ancillaryService}</TableCell>
+                                    <TableCell>
+                                        {passenger.wheelChair ?
+                                            ((passenger.wheelChair === "Yes") || (passenger.wheelChair === true)) ?
+                                                "Yes" : "No" : 'No'
+                                        }
+                                    </TableCell>
+                                    <TableCell>
+                                        {passenger.infants ?
+                                            ((passenger.infants === "Yes") || (passenger.infants === true)) ?
+                                                "Yes" : "No" : 'No'
+                                        }
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </Paper>
+                </div>
+                <div style={{ padding: '10px' }}>
+                    <Paper style={{ padding: '40px' }}>
+                        <Form />
+                    </Paper>
                 </div>
             </div>
         );

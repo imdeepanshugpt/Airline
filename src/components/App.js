@@ -7,11 +7,12 @@ import InFlight from './features/InFlight';
 import PassengerList from './features/PassengerList';
 import Adminstrator from './admin/Adminstrator';
 import history from '../history';
+import './App.scss';
 
 const App = () => {
     return (
         <Router history={history}>
-            <div className="parentWrapper" style={{ fontFamily: 'arial, sans-serif' }}>
+            <div className="wrapper" style={{ fontFamily: 'arial, sans-serif' }}>
                 <Header />
                 <Route path="/" exact component={FlightDetails} />
                 <Route path="/checkin" component={CheckIn} />

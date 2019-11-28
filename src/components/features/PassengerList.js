@@ -87,9 +87,9 @@ class PassengerList extends React.Component {
             });
         } else {
             return (
-                <div style={{ margin: '20px', textAlign: 'center' }}>
-                    Sorry passenger data is not available
-                </div>
+                <TableRow>
+                    <TableCell style={{ textAlign: 'center' }} >Sorry passenger data is not available</TableCell >
+                </TableRow>
             );
         }
     }

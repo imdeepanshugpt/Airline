@@ -1,4 +1,5 @@
 import React from 'react';
+import { Suspense } from 'react';
 import clsx from 'clsx';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,13 +20,8 @@ import FaceIcon from '@material-ui/icons/Face';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import { connect } from 'react-redux';
 import { fetchPassengerDetails, fetchFlightDetails, managePassenger, updatePassengerDetails } from '../../store/actions';
-import PieChart from './PieChart';
-import PassengerList from '../features/PassengerList';
 import Button from '@material-ui/core/Button';
 import { useState, useEffect } from 'react';
-import SimpleCard from './Card';
-import history from '../../history';
-import Form from './Form';
 import Tooltip from '@material-ui/core/Tooltip';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -33,6 +29,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import history from '../../history';
+
+const PieChart = React.lazy(() => import('./PieChart'));
+const PassengerList = React.lazy(() => import('../features/PassengerList'));
+const SimpleCard = React.lazy(() => import('./Card'));
+const Form = React.lazy(() => import('./Form'));
 
 const drawerWidth = 240;
 
@@ -165,7 +167,9 @@ const Admin = (props) => {
                 </div>
                 <div style={{ padding: '10px' }}>
                     <Paper style={{ padding: '10px' }}>
-                        <Form />
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Form />
+                        </Suspense>
                     </Paper>
                 </div>
             </div>
@@ -188,18 +192,27 @@ const Admin = (props) => {
                 <div className="main" style={{ display: 'flex', 'flexWrap': 'wrap' }}>
                     <div className="widget" style={{ width: '500px', padding: '5px' }}>
                         <div className="chart">
-                            <PieChart passengers={props.passengerList.length} seatsAvailable={props.flights.length * 60} >
-                            </PieChart></div>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <PieChart
+                                    passengers={props.passengerList.length}
+                                    seatsAvailable={props.flights.length * 60} >
+                                </PieChart>
+                            </Suspense>
+                        </div>
                     </div>
                     <div className="widget" style={{ width: '500px', padding: '5px' }}>
-                        <SimpleCard title="Number of flights" data={props.flights.length} />
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <SimpleCard title="Number of flights" data={props.flights.length} />
+                        </Suspense>
                     </div>
                 </div>
             );
         } else if (selection === 'Passenger List') {
             return (
                 <div className="passengerlist">
-                    <PassengerList adminFlag={true}></PassengerList>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <PassengerList adminFlag={true}></PassengerList>
+                    </Suspense>
                 </div>
             );
         } else if (selection === 'Manage Passenger') {

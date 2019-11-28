@@ -15,9 +15,9 @@ const App = () => {
             <div className="wrapper" style={{ fontFamily: 'arial, sans-serif' }}>
                 <Header />
                 <Route path="/" exact component={FlightDetails} />
-                <Route path="/checkin" component={CheckIn} />
-                <Route path="/inflight" component={InFlight} />
-                <Route path="/passengerlist" component={PassengerList} />
+                <Route path="/:flightId/checkin" component={CheckIn} />
+                <Route path="/:flightId/inflight" component={InFlight} />
+                <Route path="/:flightId/passengerlist" component={PassengerList} />
                 <Route path="/admin" component={Adminstrator} />
             </div>
         </Router>

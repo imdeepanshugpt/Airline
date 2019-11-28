@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Suspense } from 'react';
 import { fetchPassengerDetails } from '../../store/actions';
-import SnackBar from './SnackBar';
-import SeatMap from './seatmap/SeatMap';
-import PassengerDetailTable from './PassengerDetailTable';
 import './searchBar.scss';
+
+const SnackBar = React.lazy(() => import('./SnackBar'));
+const SeatMap = React.lazy(() => import('./seatmap/SeatMap'));
+const PassengerDetailTable = React.lazy(() => import('./PassengerDetailTable'));
 
 class CheckIn extends React.Component {
     constructor(props) {
@@ -72,7 +74,13 @@ class CheckIn extends React.Component {
         }
         return (
             <div className="checkin">
-                {this.state.snackbar ? <SnackBar message={this.state.snackbarMessage} open={this.state.snackbar}></SnackBar> : ''}
+                {
+                    this.state.snackbar ?
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <SnackBar message={this.state.snackbarMessage} open={this.state.snackbar}></SnackBar>
+                        </Suspense>
+                        : ''
+                }
                 <div className="container-fluid">
                     <input type="text" className="search-input" name="search" placeholder="Enter PNR Number"
                         onChange={(event) => this.fetchPassengerDetails(event, updatedPassengerList)} />
@@ -82,22 +90,26 @@ class CheckIn extends React.Component {
                         {
                             ((passengerDetails.length === 1) && (passengerDetails[0].name))
                                 ?
-                                < PassengerDetailTable
-                                    flightDetails={this.state.flightDetails}
-                                    passenger={passengerDetails[0]}
-                                    selectedSeat={this.state.selectedSeat} />
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    < PassengerDetailTable
+                                        flightDetails={this.state.flightDetails}
+                                        passenger={passengerDetails[0]}
+                                        selectedSeat={this.state.selectedSeat} />
+                                </Suspense>
                                 : ""
                         }
                     </div>
                     <div>
                         {
                             (passengerDetails.length === 1 && this.state.flightDetails) ?
-                                <SeatMap
-                                    onPassengerDetailChange={
-                                        (passenger) => this.onPassengerDetailChange(passenger)
-                                    }
-                                    passenger={passengerDetails[0]}
-                                    seatCheckIn={this.state.flightDetails.seatCheckIns} />
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <SeatMap
+                                        onPassengerDetailChange={
+                                            (passenger) => this.onPassengerDetailChange(passenger)
+                                        }
+                                        passenger={passengerDetails[0]}
+                                        seatCheckIn={this.state.flightDetails.seatCheckIns} />
+                                </Suspense>
                                 : ''
                         }
                     </div>

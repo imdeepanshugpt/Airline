@@ -1,7 +1,9 @@
 import React from 'react';
-import SeatButton from './SeatButton';
+import { Suspense } from 'react';
 import Grid from '@material-ui/core/Grid';
-import SnackBar from '../SnackBar';
+
+const SeatButton = React.lazy(() => import('./SeatButton'));
+const SnackBar = React.lazy(() => import('../SnackBar'));
 
 class SeatMap extends React.Component {
     constructor(props) {
@@ -41,15 +43,16 @@ class SeatMap extends React.Component {
                 );
             }
             renderingRow.push(
-                <SeatButton
-                    onClick={
-                        (event, buttonColor) => {
-                            this.seatSelected(((index) + seatNumber), buttonColor, checkInRow[arrayIndex])
+                <Suspense fallback={<div>Loading...</div>} key={(index) + seatNumber}>
+                    <SeatButton
+                        onClick={
+                            (event, buttonColor) => {
+                                this.seatSelected(((index) + seatNumber), buttonColor, checkInRow[arrayIndex])
+                            }
                         }
-                    }
-                    key={(index) + seatNumber}
-                    color={color}
-                    seatNumber={(index) + seatNumber} />
+                        color={color}
+                        seatNumber={(index) + seatNumber} />
+                </Suspense>
             );
         });
         return renderingRow;
@@ -83,7 +86,9 @@ class SeatMap extends React.Component {
         colorCodes.forEach((element) => {
             renderingcolorInfo.push(
                 <div style={{ display: 'flex' }} key={element.name}>
-                    <SeatButton color={element.color} onClick={(event) => event.stopPropagation()} />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <SeatButton color={element.color} onClick={(event) => event.stopPropagation()} />
+                    </Suspense>
                     <h6 style={{
                         textAlign: 'center',
                         marginTop: '15px'
@@ -103,7 +108,9 @@ class SeatMap extends React.Component {
                     </Grid>
                     {this.renderRows()}
                 </Grid>
-                <SnackBar message={this.state.snackbarMessage} open={this.state.snackbar}></SnackBar>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <SnackBar message={this.state.snackbarMessage} open={this.state.snackbar}></SnackBar>
+                </Suspense>
             </div>
         );
     }

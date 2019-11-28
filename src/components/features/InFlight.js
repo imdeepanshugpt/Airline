@@ -1,10 +1,12 @@
 import React from 'react';
+import { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { fetchPassengerDetails, managePassenger, updatePassengerDetails } from '../../store/actions';
 import { Field, reduxForm } from 'redux-form';
-import SnackBar from './SnackBar';
-import SeatMap from './seatmap/SeatMap';
 import Button from '@material-ui/core/Button';
+
+const SnackBar = React.lazy(() => import('./SnackBar'));
+const SeatMap = React.lazy(() => import('./seatmap/SeatMap'));
 
 class InFlight extends React.Component {
     constructor(props) {
@@ -97,9 +99,9 @@ class InFlight extends React.Component {
             );
         } else {
             return (
-                <div style={{ textAlign: 'center', margin: '50px', position: 'sticky', top: '100px' }}>
+                <aside style={{ textAlign: 'center', margin: '50px', position: 'sticky', top: '100px' }}>
                     Please select the occupied seat to see the passenger details
-                </div>
+                </aside>
             );
         }
     }
@@ -112,20 +114,24 @@ class InFlight extends React.Component {
             <div className="flightIn">
                 {
                     this.state.snackbar ?
-                        <SnackBar
-                            message="Details has been updated successfully !"
-                            open={this.state.snackbar}
-                        ></SnackBar>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <SnackBar
+                                message="Details has been updated successfully !"
+                                open={this.state.snackbar}
+                            ></SnackBar>
+                        </Suspense>
                         : ''
                 }
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {this.renderReduxForm()}
-                    <SeatMap
-                        inFlight="true"
-                        onPassengerDetailChange={
-                            (pnrNumber) => this.onPassengerDetailChange(pnrNumber)
-                        }
-                        seatCheckIn={this.state.flightDetails.seatCheckIns} />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <SeatMap
+                            inFlight="true"
+                            onPassengerDetailChange={
+                                (pnrNumber) => this.onPassengerDetailChange(pnrNumber)
+                            }
+                            seatCheckIn={this.state.flightDetails.seatCheckIns} />
+                    </Suspense>
                 </div>
             </div>
         );

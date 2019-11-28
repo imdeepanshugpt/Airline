@@ -59,17 +59,20 @@ export class FlightDetails extends React.Component {
                             </Typography>
                         </CardContent>
                         <Tooltip title="checkin">
-                            <Button style={this.cardColor} onClick={() => history.push("/checkin", flight)} >
+                            <Button style={this.cardColor} onClick={() =>
+                                history.push(`/${flight.airlineId}/checkin`, flight)} >
                                 CheckIn
                         </Button>
                         </Tooltip>
                         <Tooltip title="flightIn">
-                            <Button style={this.cardColor} onClick={() => history.push("/inflight", flight)}>
+                            <Button style={this.cardColor} onClick={() =>
+                                history.push(`/${flight.airlineId}/inflight`, flight)}>
                                 FlightIn
                         </Button>
                         </Tooltip>
                         <Tooltip title="passenger list">
-                            <Button style={this.cardColor} onClick={() => history.push("/passengerlist", flight)}>
+                            <Button style={this.cardColor} onClick={() =>
+                                history.push(`/${flight.airlineId}/passengerlist`, flight)}>
                                 PassengerList
                         </Button>
                         </Tooltip>

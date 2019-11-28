@@ -1,13 +1,15 @@
 import React from 'react';
+import { Suspense } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import GoogleAuth from './GoogleAuth';
 import IconButton from '@material-ui/core/IconButton';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import history from '../../history';
 import Tooltip from '@material-ui/core/Tooltip';
+
+const GoogleAuth = React.lazy(() => import('./GoogleAuth'));
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,9 +25,8 @@ const useStyles = makeStyles(theme => ({
 
 const Header = () => {
   const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <header className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <Tooltip title="home">
@@ -36,10 +37,12 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Airline
           </Typography>
-          <GoogleAuth />
+          <Suspense fallback={<div>Loading...</div>}>
+            <GoogleAuth />
+          </Suspense>
         </Toolbar>
       </AppBar>
-    </div>
+    </header>
   );
 }
 

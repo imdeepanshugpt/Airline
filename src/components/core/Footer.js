@@ -11,11 +11,15 @@ const Footer = () => {
     return (
         <footer style={style}>
             <AppBar position="static">
-                <Typography variant="h6">
+                <Typography variant="h6" style={{
+                    margin: '10px',
+                    fontSize: 'medium'
+                }}
+                >
                     Airline Application | Airline Model using ReactJs
                 </Typography>
             </AppBar>
-        </footer>
+        </footer >
     );
 }
 

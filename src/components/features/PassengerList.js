@@ -17,7 +17,8 @@ class PassengerList extends React.Component {
         super(props);
         this.state = { flightDetails: undefined, updatedPassengerList: undefined };
     }
-    componentWillMount() {
+
+    UNSAFE_componentWillMount() {
         this.props.fetchPassengerDetails();
         if (!this.props.adminFlag) {
             this.setState({ flightDetails: this.props.history.location.state });

@@ -26,4 +26,11 @@ module.exports = {
         "no-undef": 0
     },
     "ignorePatterns": ["serviceWorker.js", "node_modules/"],
+    "parser": "babel-eslint",
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+
 };

@@ -18,7 +18,7 @@ class InFlight extends React.Component {
             snackbar: false
         };
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.fetchPassengerDetails();
         const flightDetails = this.props.history.location.state;
         this.setState({ flightDetails: flightDetails });

@@ -20,7 +20,7 @@ class CheckIn extends React.Component {
         }
 
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.fetchPassengerDetails();
         if (this.props.history.location.state.passenger && this.props.history.location.state.flightDetails) {
             let changeSeatPassengerDetails;

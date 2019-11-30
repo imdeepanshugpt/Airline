@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
 import { connect } from 'react-redux';
 import { fetchPassengerDetails } from '../../store/actions';
 import Button from '@material-ui/core/Button';
@@ -123,7 +122,7 @@ class PassengerList extends React.Component {
     }
     renderTableHeader() {
         return (
-            <Paper>
+            <Paper style={{ width: 'fit-content' }}>
                 <Table >
                     <TableHead>
                         <TableRow>
@@ -146,7 +145,7 @@ class PassengerList extends React.Component {
 
         return (
             <div className="passenger-list">
-                <Card>
+                <Paper>
                     <div className="container">
                         <div className="checkbox">
                             <input type="checkbox" id="checkbox1" name="" value=""
@@ -164,7 +163,7 @@ class PassengerList extends React.Component {
                             <label htmlFor="checkbox3"><span>Infant</span></label>
                         </div>
                     </div>
-                </Card>
+                </Paper>
                 {this.renderTableHeader()}
             </div>
         );

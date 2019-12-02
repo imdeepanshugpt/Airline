@@ -1,11 +1,20 @@
 It is an airline appication made using ReactJS version 16.9.0. It has functionality of checkin, InFlight, Admin Dashboard.
-## It uses the Google Oauth for authentication.
-## It has PWA functionality with offline caching of assests and API's.
-## It uses the JSON-SERVER for database. https://github.com/imdeepanshugpt/airline-server.
-## It has redux implementation for get, put, post and patch calls of API.
-## ESLint is configured for code quality .
-## Lazy-Loading routing is implemented with auth guard.
-## Material UI is used for whole application no other ui library dependency.
+
+**It uses the Google Oauth for authentication.**
+
+**It has PWA functionality with offline caching of assests and API's.**
+
+**It uses the JSON-SERVER for database. https://github.com/imdeepanshugpt/airline-server.**
+
+**It has redux implementation for get, put, post and patch calls of API.**
+
+**ESLint is configured for code quality.**
+
+**Lazy-Loading routing is implemented with auth guard.**
+
+**Material UI is used for whole application no other ui library dependency.**
+
+**Enzyme is used for unit-testing.**
 
 
 ## Available Scripts

@@ -1,13 +1,11 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 It is an airline appication made using ReactJS version 16.9.0. It has functionality of checkin, InFlight, Admin Dashboard.
--> It uses the Google Oauth for authentication.
--> It has PWA functionality with offline caching of assests and API's.
--> It uses the JSON-SERVER for database. https://github.com/imdeepanshugpt/airline-server.
--> It has redux implementation for get, put, post and patch calls of API.
--> For code quality ESLint is configured.
--> Lazy-Loading routing is implemented with auth guard.
--> Only material UI is used for whole application no other ui library.
+## It uses the Google Oauth for authentication.
+## It has PWA functionality with offline caching of assests and API's.
+## It uses the JSON-SERVER for database. https://github.com/imdeepanshugpt/airline-server.
+## It has redux implementation for get, put, post and patch calls of API.
+## ESLint is configured for code quality .
+## Lazy-Loading routing is implemented with auth guard.
+## Material UI is used for whole application no other ui library dependency.
 
 
 ## Available Scripts

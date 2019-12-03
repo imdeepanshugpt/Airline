@@ -12,6 +12,11 @@
       "type": "image/png",
       "sizes": "128x128"
     },
+	    {
+      "src": "airline192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
     {
       "src": "airline512.png",
       "type": "image/png",

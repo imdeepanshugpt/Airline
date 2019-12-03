@@ -4,7 +4,7 @@ It is an airline appication made using ReactJS version 16.9.0. It has functional
 
 - **It has PWA functionality with offline caching of assests and API's.**
 
-- **It uses the JSON-SERVER for database. https://github.com/imdeepanshugpt/airline-server.**
+- **It uses the JSON-SERVER for [database](https://github.com/imdeepanshugpt/airline-server).**
 
 - **It has redux implementation for get, put, post and patch calls of API.**
 

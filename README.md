@@ -1,4 +1,7 @@
+## Airline Application
 It is an airline appication made using ReactJS version 16.9.0. It has functionality of checkin, InFlight, Admin Dashboard.
+
+## Features
 
 - **It uses the Google Oauth for authentication.**
 

@@ -8,8 +8,8 @@ self.addEventListener('install', e => {
                 `/index.html`,
                 `/json/data.json`,
                 `/static/js/bundle.js`,
-                `http://localhost:3001/flights`,
-                `http://localhost:3001/passengers`
+                `https://airline-server.herokuapp.com/flights`,
+                `https://airline-server.herokuapp.com/passengers`
             ])
                 .then(() => self.skipWaiting());
         })

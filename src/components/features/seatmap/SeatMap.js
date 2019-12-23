@@ -1,6 +1,7 @@
 import React from 'react';
 import { Suspense } from 'react';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const SeatButton = React.lazy(() => import('./SeatButton'));
 const SnackBar = React.lazy(() => import('../SnackBar'));
@@ -43,7 +44,7 @@ class SeatMap extends React.Component {
                 );
             }
             renderingRow.push(
-                <Suspense fallback={<div>Loading...</div>} key={(index) + seatNumber}>
+                <Suspense fallback={<CircularProgress />} key={(index) + seatNumber}>
                     <SeatButton
                         onClick={
                             (event, buttonColor) => {
@@ -86,7 +87,7 @@ class SeatMap extends React.Component {
         colorCodes.forEach((element) => {
             renderingcolorInfo.push(
                 <div style={{ display: 'flex' }} key={element.name}>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<CircularProgress />}>
                         <SeatButton color={element.color} onClick={(event) => event.stopPropagation()} />
                     </Suspense>
                     <h6 style={{
@@ -108,7 +109,7 @@ class SeatMap extends React.Component {
                     </Grid>
                     {this.renderRows()}
                 </Grid>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<CircularProgress />}>
                     <SnackBar message={this.state.snackbarMessage} open={this.state.snackbar}></SnackBar>
                 </Suspense>
             </div>

@@ -122,7 +122,10 @@ class PassengerList extends React.Component {
     }
     renderTableHeader() {
         return (
-            <Paper style={{ width: 'fit-content' }}>
+            <Paper style={{
+                width: '100%',
+                overflowX: 'auto'
+            }}>
                 <Table >
                     <TableHead>
                         <TableRow>
@@ -150,7 +153,7 @@ class PassengerList extends React.Component {
                         <div className="checkbox">
                             <input type="checkbox" id="checkbox1" name="" value=""
                                 onClick={(event) => this.filterByCheckBox(event.target.checked, 'CheckIn')} />
-                            <label htmlFor="checkbox1"><span>CheckIn</span></label>
+                            <label htmlFor="checkbox1">CheckIn</label>
                         </div>
                         <div className="checkbox">
                             <input type="checkbox" id="checkbox2" name="" value=""

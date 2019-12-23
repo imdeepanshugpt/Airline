@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Suspense } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { fetchPassengerDetails } from '../../store/actions';
 import './searchBar.scss';
 
@@ -76,7 +77,7 @@ class CheckIn extends React.Component {
             <div className="checkin">
                 {
                     this.state.snackbar ?
-                        <Suspense fallback={<div>Loading...</div>}>
+                        <Suspense fallback={<CircularProgress />}>
                             <SnackBar message={this.state.snackbarMessage} open={this.state.snackbar}></SnackBar>
                         </Suspense>
                         : ''
@@ -90,7 +91,7 @@ class CheckIn extends React.Component {
                         {
                             ((passengerDetails.length === 1) && (passengerDetails[0].name))
                                 ?
-                                <Suspense fallback={<div>Loading...</div>}>
+                                <Suspense fallback={<CircularProgress />}>
                                     < PassengerDetailTable
                                         flightDetails={this.state.flightDetails}
                                         passenger={passengerDetails[0]}
@@ -102,7 +103,7 @@ class CheckIn extends React.Component {
                     <div>
                         {
                             (passengerDetails.length === 1 && this.state.flightDetails) ?
-                                <Suspense fallback={<div>Loading...</div>}>
+                                <Suspense fallback={<CircularProgress />}>
                                     <SeatMap
                                         onPassengerDetailChange={
                                             (passenger) => this.onPassengerDetailChange(passenger)

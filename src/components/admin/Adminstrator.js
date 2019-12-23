@@ -29,6 +29,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import history from '../../history';
 
 const PieChart = React.lazy(() => import('./PieChart'));
@@ -167,7 +168,7 @@ const Admin = (props) => {
                 </div>
                 <div style={{ padding: '10px' }}>
                     <Paper style={{ padding: '10px' }}>
-                        <Suspense fallback={<div>Loading...</div>}>
+                        <Suspense fallback={<CircularProgress />}>
                             <Form />
                         </Suspense>
                     </Paper>
@@ -192,7 +193,7 @@ const Admin = (props) => {
                 <div className="main" style={{ display: 'flex', 'flexWrap': 'wrap' }}>
                     <div className="widget" style={{ width: '500px', padding: '5px' }}>
                         <div className="chart">
-                            <Suspense fallback={<div>Loading...</div>}>
+                            <Suspense fallback={<CircularProgress />}>
                                 <PieChart
                                     passengers={props.passengerList.length}
                                     seatsAvailable={props.flights.length * 60} >
@@ -201,7 +202,7 @@ const Admin = (props) => {
                         </div>
                     </div>
                     <div className="widget" style={{ width: '500px', padding: '5px' }}>
-                        <Suspense fallback={<div>Loading...</div>}>
+                        <Suspense fallback={<CircularProgress />}>
                             <SimpleCard title="Number of flights" data={props.flights.length} />
                         </Suspense>
                     </div>
@@ -210,7 +211,7 @@ const Admin = (props) => {
         } else if (selection === 'Passenger List') {
             return (
                 <div className="passengerlist">
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<CircularProgress />}>
                         <PassengerList adminFlag={true}></PassengerList>
                     </Suspense>
                 </div>

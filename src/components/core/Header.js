@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import history from '../../history';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -37,7 +38,7 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Airline
           </Typography>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<CircularProgress />}>
             <GoogleAuth />
           </Suspense>
         </Toolbar>

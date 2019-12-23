@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { fetchPassengerDetails, managePassenger, updatePassengerDetails } from '../../store/actions';
 import { Field, reduxForm } from 'redux-form';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
 const SnackBar = React.lazy(() => import('./SnackBar'));
@@ -114,7 +115,7 @@ class InFlight extends React.Component {
             <div className="flightIn">
                 {
                     this.state.snackbar ?
-                        <Suspense fallback={<div>Loading...</div>}>
+                        <Suspense fallback={<CircularProgress />}>
                             <SnackBar
                                 message="Details has been updated successfully !"
                                 open={this.state.snackbar}
@@ -124,7 +125,7 @@ class InFlight extends React.Component {
                 }
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {this.renderReduxForm()}
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<CircularProgress />}>
                         <SeatMap
                             inFlight="true"
                             onPassengerDetailChange={

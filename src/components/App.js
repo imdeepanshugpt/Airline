@@ -28,9 +28,9 @@ const App = (props) => {
                                 <Route path="/admin" component={Adminstrator} />
                             </React.Fragment>
                             :
-                            <article className="authenticate">
+                            <h1 className="authenticate">
                                 You need to be authenticated to view ! Please login.
-                            </article>
+                            </h1>
                     }
                 </div>
                 <Footer />

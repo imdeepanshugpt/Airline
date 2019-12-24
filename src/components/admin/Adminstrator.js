@@ -7,7 +7,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -253,9 +252,13 @@ const Admin = (props) => {
                             <MenuIcon />
                         </IconButton>
                     </Tooltip>
-                    <Typography variant="h6" noWrap>
+                    <div style={{
+                        fontSize: 'medium',
+                        wordBreak: 'break-word',
+                        width: '40%'
+                    }}>
                         Admin Dashboard
-                    </Typography>
+                    </div>
                     <Tooltip title="home">
                         <Button color="inherit"
                             onClick={() => { history.push("/") }}

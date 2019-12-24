@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import './PieChart.scss';
 
 class PieChart extends React.Component {
     render() {
@@ -20,6 +21,7 @@ class PieChart extends React.Component {
             segmentShowStroke: true,
             segmentStrokeColor: '#fff',
             segmentStrokeWidth: 2,
+            cutoutPercentage:50,
             percentageInnerCutout: 50,
             animationSteps: 100,
             animationEasing: 'easeOutBounce',
@@ -35,7 +37,7 @@ class PieChart extends React.Component {
                     <Typography color="textSecondary" gutterBottom>
                         Passenger Chart
                     </Typography>
-                    <Doughnut data={chartData} options={chartOptions} width={500} height={250} />
+                    <Doughnut data={chartData} options={chartOptions} />
                 </CardContent>
             </Card>
         );

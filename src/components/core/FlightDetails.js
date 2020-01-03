@@ -10,6 +10,7 @@ import history from '../../history';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
+import './Button.module.scss';
 
 export class FlightDetails extends React.Component {
     componentDidMount() {
@@ -18,7 +19,7 @@ export class FlightDetails extends React.Component {
     cardColor = {
         color: 'white',
         backgroundColor: 'midnightblue',
-        margin: '10px',
+        margin: '10px'
     };
     onTheWay = {
         display: 'flex',
@@ -26,11 +27,6 @@ export class FlightDetails extends React.Component {
     };
     flightHeader = {
         textAlign: 'center',
-        fontSize: '20px',
-        height: '100px',
-        verticalAlign: 'middle',
-        lineHeight: '100px',
-        fontWeight: 'bold',
         fontFamily: 'Arial, Helvetica, sans-serif'
     }
 
@@ -85,7 +81,10 @@ export class FlightDetails extends React.Component {
         return (
             <div>
                 <Card style={this.flightHeader}>
-                    Currently Scheduled Flights
+                    <h1 style={{
+                        color: '#3d1c71',
+                        fontWeight: '300'
+                    }}>Currently Scheduled Flights</h1>
                 </Card>
                 {this.renderFlightList()}
             </div>

@@ -10,7 +10,6 @@ import history from '../../history';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
-import './Button.module.scss';
 
 export class FlightDetails extends React.Component {
     componentDidMount() {

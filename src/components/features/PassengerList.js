@@ -41,7 +41,7 @@ class PassengerList extends React.Component {
         }
     }
     changeSeat(passenger) {
-        history.push("/checkin", { passenger, flightDetails: this.state.flightDetails });
+        history.push(`/${this.state.flightDetails.airlineId}/checkin`, { passenger, flightDetails: this.state.flightDetails });
     }
     renderPassengerList() {
         const buttonStyle = {
